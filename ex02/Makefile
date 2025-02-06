@@ -1,4 +1,4 @@
-NAME = Serialize
+NAME = DynamicCast
 
 SRC = main.cpp Base.cpp A.cpp B.cpp C.cpp utils.cpp
 

@@ -1,5 +1,24 @@
 # include "ScalarConverter.hpp"
 
+ScalarConverter::ScalarConverter()
+{
+}
+ScalarConverter::ScalarConverter(ScalarConverter const & src)
+{
+	*this = src;
+}
+
+ScalarConverter & ScalarConverter::operator=(ScalarConverter const & src)
+{
+	(void)src;
+	return *this;
+}
+
+ScalarConverter::~ScalarConverter()
+{
+}
+
+
 void	DisplayConversion(double value)
 {
 	if (value >= 32 && value <= 126)
@@ -11,6 +30,7 @@ void	DisplayConversion(double value)
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(value) << std::endl;
+
 	std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(value) << "f" << std::endl;
 	std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(value) << std::endl;
 }
@@ -60,24 +80,13 @@ void	ScalarConverter::convert(std::string str)
 		throw std::exception();
 
 	double	double_nb = std::atof(str.c_str());
-	// if (str.find('.') == std::string::npos && str.find('f') == std::string::npos)
-	// 	double_nb = static_cast<int>(std::atof(str.c_str()));
-	// else if (str.find('.') != std::string::npos || str.find('f') != std::string::npos)
-	// 	double_nb = std::atof(str.c_str());
-	DisplayConversion(double_nb);
+	if (str.find('.') == std::string::npos && str.find('f') == std::string::npos)
+	{
+		if (double_nb >= std::numeric_limits<int>::min() && double_nb <= std::numeric_limits<int>::max())
+			DisplayConversion(static_cast<int>(double_nb));
+		else
+			DisplayConversion(double_nb);
+	}
+	else if (str.find('.') != std::string::npos || str.find('f') != std::string::npos)
+		DisplayConversion(double_nb);
 }
-
-	// double nb = std::atof(str.c_str());
-
-	// if ((nb >= 0 && nb < 32) || nb >= 127)
-	// 	std::cout << "char: Non displayable" << std::endl;
-	// else if (nb >= 32 && nb <= 126)
-	// 	std::cout << "char: '" << static_cast<char>(nb) << "'" << std::endl;
-
-	// if (nb > std::numeric_limits<int>::max() || nb < std::numeric_limits<int>::min())
-	// 	std::cout << "int: impossible" << std::endl;
-	// else
-	// 	std::cout << "int: " << static_cast<int>(nb) << std::endl;
-
-	// std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(nb) << "f" << std::endl;
-	// std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(nb) << std::endl;

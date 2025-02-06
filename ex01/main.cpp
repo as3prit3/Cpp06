@@ -21,11 +21,6 @@ int main()
 
 	// std::string *ptr_int = reinterpret_cast<std::string *>(&ptr);
 
-	// std::cout << "Here is the serialized structs:" <<
-	// 			"\n\taddress: " << ptr_int << std::endl;
-	// std::cout << "Here is the deserialized structs:" <<
-	// 			"\n\taddress: " << reinterpret_cast<Data *>(ptr_int);
-
 	// std::cout << "\n\n";
 
 	// std::cout << "string name: " << *ptr_int << std::endl;
